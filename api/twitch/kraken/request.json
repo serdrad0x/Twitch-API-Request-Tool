@@ -1,0 +1,1454 @@
+{
+  "kraken/bits/actions":{
+    "get":{
+      "optional_query":{
+        "channel_id":{
+          "type":"string",
+          "description":"If this is specified, the cheermote for this channel is included in the response (if the channel owner has uploaded a channel-specific cheermote)."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/bits/actions",
+      "docs":"https://dev.twitch.tv/docs/v5/reference/bits/#get-cheermotes"
+    }
+  },
+  "kraken/feed/<channel ID>/posts":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"long",
+          "description":"Maximum number of most-recent objects to return. Default: 10. Maximum: 100."
+        },
+        "cursor":{
+          "type":"string",
+          "description":"Tells the server where to start fetching the next set of results in a multi-page response."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/feed/<channel ID>/posts",
+      "docs":"https://dev.twitch.tv/docs/v5/reference/channel-feed/#get-multiple-feed-posts",
+      "auth": {
+        "token": "UAT"
+      }
+    },
+    "post":{
+      "optional_query":{
+        "share":{
+          "type":"boolean",
+          "description":"When set to true, the post is shared on the channel\u2019s Twitter feed (if connected), with a link to the post\u2019s URL."
+        }
+      },
+      "required_body": {
+        "content": {
+          "type": "string",
+          "description": "Content of the post"
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"POST https://api.twitch.tv/kraken/feed/<channel ID>/posts",
+      "docs":"https://dev.twitch.tv/docs/v5/reference/channel-feed/#create-feed-post",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_feed_edit"]
+      }
+    }
+  },
+  "kraken/feed/<channel ID>/posts/<post ID>":{
+    "get":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        },
+        "<post ID>": {
+          "type": "string",
+          "description": "Post ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/feed/<channel ID>/posts/<post ID>",
+      "docs":"https://dev.twitch.tv/docs/v5/reference/channel-feed/#get-feed-post",
+      "auth": {
+        "token": "UAT"
+      }
+    },
+    "delete":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        },
+        "<post ID>": {
+          "type": "string",
+          "description": "Post ID"
+        }
+      },
+      "url":"DELETE https://api.twitch.tv/kraken/feed/<channel ID>/posts/<post ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channel-feed/#delete-feed-post",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_feed_edit"]
+      }
+    }
+  },
+  "kraken/feed/<channel ID>/posts/<post ID>/reactions":{
+    "post":{
+      "required_query": {
+        "emote_id": {
+          "type": "string",
+          "description": "Id of the emote."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        },
+        "<post ID>": {
+          "type": "string",
+          "description": "Post ID"
+        }
+      },
+      "url":"POST https://api.twitch.tv/kraken/feed/<channel ID>/posts/<post ID>/reactions",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channel-feed/#create-reaction-to-a-feed-post",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_feed_edit"]
+      }
+    },
+    "delete":{
+      "required_query": {
+        "emote_id": {
+          "type": "string",
+          "description": "Id of the emote."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        },
+        "<post ID>": {
+          "type": "string",
+          "description": "Post ID"
+        }
+      },
+      "url":"DELETE https://api.twitch.tv/kraken/feed/<channel ID>/posts/<post ID>/reactions",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channel-feed/#delete-reaction-to-a-feed-post",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_feed_edit"]
+      }
+    }
+  },
+  "kraken/feed/<channel ID>/posts/<post ID>/comments":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"long",
+          "description":"Maximum number of most-recent objects to return. Default: 10. Maximum: 100."
+        },
+        "cursor":{
+          "type":"string",
+          "description":"Tells the server where to start fetching the next set of results, in a multi-page response."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        },
+        "<post ID>": {
+          "type": "string",
+          "description": "Post ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/feed/<channel ID>/posts/<post ID>/comments",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channel-feed/#get-feed-comments",
+      "auth": {
+        "token": "UAT"
+      }
+    },
+    "post": {
+      "required_query": {
+        "content": {
+          "type": "string",
+          "description": "Comment to be created."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        },
+        "<post ID>": {
+          "type": "string",
+          "description": "Post ID"
+        }
+      },
+      "url": "POST https://api.twitch.tv/kraken/feed/<channel ID>/posts/<post ID>/comments",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channel-feed/#create-feed-comment",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_feed_edit"]
+      }
+    }
+  },
+  "kraken/feed/<channel ID>/posts/<post ID>/comments/<comment ID>":{
+    "delete":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        },
+        "<post ID>": {
+          "type": "string",
+          "description": "Post ID"
+        },
+        "<comment ID>": {
+          "type": "string",
+          "description": "Comment ID"
+        }
+      },
+      "url":"DELETE https://api.twitch.tv/kraken/feed/<channel ID>/posts/<post ID>/comments/<comment ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channel-feed/#delete-feed-comment",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_feed_edit"]
+      }
+    }
+  },
+  "kraken/feed/<channel ID>/posts/<post ID>/comments/<comment ID>/reactions":{
+    "post":{
+      "required_query": {
+        "emote_id": {
+          "type": "string",
+          "description": "Id of the emote."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        },
+        "<post ID>": {
+          "type": "string",
+          "description": "Post ID"
+        },
+        "<comment ID>": {
+          "type": "string",
+          "description": "Comment ID"
+        }
+      },
+      "url":"POST https://api.twitch.tv/kraken/feed/<channel ID>/posts/<post ID>/comments/<comment ID>/reactions",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channel-feed/#create-reaction-to-a-feed-comment",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_feed_edit"]
+      }
+    },
+    "delete":{
+      "required_query": {
+        "emote_id": {
+          "type": "string",
+          "description": "Id of the emote."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        },
+        "<post ID>": {
+          "type": "string",
+          "description": "Post ID"
+        },
+        "<comment ID>": {
+          "type": "string",
+          "description": "Comment ID"
+        }
+      },
+      "url":"DELETE https://api.twitch.tv/kraken/feed/<channel ID>/posts/<post ID>/comments/<comment ID>/reactions",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channel-feed/#delete-reaction-to-a-feed-comment",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_feed_edit"]
+      }
+    }
+  },
+  "kraken/channel":{
+    "get":{
+      "url":"GET https://api.twitch.tv/kraken/channel",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#get-channel",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_read"]
+      }
+    }
+  },
+  "kraken/channels/<channel ID>":{
+    "get":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/channels/<channel ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-by-id"
+    },
+    "put":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"PUT https://api.twitch.tv/kraken/channels/<channel ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#update-channel",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_editor"]
+      }
+    }
+  },
+  "kraken/channels/<channel ID>/editors":{
+    "get":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/channels/<channel ID>/editors",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-editors",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_read"]
+      }
+    }
+  },
+  "kraken/channels/<channel ID>/follows":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Default: 25. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        },
+        "cursor":{
+          "type":"string",
+          "description":"Tells the server where to start fetching the next set of results, in a multi-page response."
+        },
+        "direction":{
+          "type":"string",
+          "description":"Direction of sorting. Valid values: asc, desc (newest first). Default: desc."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/channels/<channel ID>/follows",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-followers"
+    }
+  },
+  "kraken/channels/<channel ID>/teams":{
+    "get":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/channels/<channel ID>/teams",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-teams"
+    }
+  },
+  "kraken/channels/<channel ID>/subscriptions":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Default: 25. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        },
+        "direction":{
+          "type":"string",
+          "description":"Sorting direction. Valid values: asc, desc. Default: asc (oldest first)."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/channels/<channel ID>/subscriptions",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-subscribers",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_subscriptions"]
+      }
+    }
+  },
+  "kraken/channels/<channel ID>/subscriptions/<user ID>":{
+    "get":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        },
+        "<user ID>": {
+          "type": "string",
+          "description": "User ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/channels/<channel ID>/subscriptions/<user ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#check-channel-subscription-by-user",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_check_subscription"]
+      }
+    }
+  },
+  "kraken/channels/<channel ID>/videos":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Default: 10. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        },
+        "broadcast_type":{
+          "type":"comma-separated list",
+          "description":"Constrains the type of videos returned. Valid values: (any combination of) archive, highlight, upload. Default: all types (no filter)."
+        },
+        "language":{
+          "type":"comma-separated list",
+          "description":"Constrains the language of the videos that are returned; for example, en,es. Default: all languages."
+        },
+        "sort":{
+          "type":"string",
+          "description":"Sorting order of the returned objects. Valid values: views, time. Default: time (most recent first)."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/channels/<channel ID>/videos",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-videos"
+    }
+  },
+  "kraken/channels/<channel ID>/commercial":{
+    "post":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"POST https://api.twitch.tv/kraken/channels/<channel ID>/commercial",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#start-channel-commercial",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_commercial"]
+      }
+    }
+  },
+  "kraken/channels/<channel ID>/stream_key":{
+    "delete":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"DELETE https://api.twitch.tv/kraken/channels/<channel ID>/stream_key",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#reset-channel-stream-key",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_stream"]
+      }
+    }
+  },
+  "kraken/channels/<channel ID>/communities":{
+    "get":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/channels/<channel ID>/communities",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-communities"
+    },
+    "put":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"PUT https://api.twitch.tv/kraken/channels/<channel ID>/communities",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#set-channel-communities",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_editor"]
+      }
+    }
+  },
+  "kraken/channels/<channel ID>/community": {
+    "delete": {
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url": "DELETE https://api.twitch.tv/kraken/channels/<channel ID>/community",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/channels/#delete-channel-from-communities"
+    }
+  },
+  "kraken/chat/<channel ID>/badges":{
+    "get":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/chat/<channel ID>/badges",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/chat/#get-chat-badges-by-channel"
+    }
+  },
+  "kraken/chat/emoticon_images":{
+    "get":{
+      "optional_query":{
+        "emotesets":{
+          "type":"list of integers",
+          "description":"Specifies the set(s) of emoticons to retrieve. If no set is specified, all chat emoticons are returned."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/chat/emoticon_images",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/chat/#get-chat-emoticons-by-set"
+    }
+  },
+  "kraken/chat/emoticons":{
+    "get":{
+      "url":"GET https://api.twitch.tv/kraken/chat/emoticons",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/chat/#get-all-chat-emoticons"
+    }
+  },
+  "kraken/chat/<channel ID>/rooms":{
+    "get":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/chat/<channel ID>/rooms",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/chat/#get-chat-rooms-by-channel",
+      "auth": {
+        "token": "UAT"
+      }
+    }
+  },
+  "kraken/clips/<slug>":{
+    "get":{
+      "path": {
+        "<slug>": {
+          "type": "string",
+          "description": "Slug"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/clips/<slug>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/clips/#get-clip"
+    }
+  },
+  "kraken/clips/top":{
+    "get":{
+      "optional_query":{
+        "channel":{
+          "type":"string",
+          "description":"Channel name. If this is specified, top clips for only this channel are returned; otherwise, top clips for all channels are returned. If both channel and game are specified, game is ignored."
+        },
+        "cursor":{
+          "type":"string",
+          "description":"Tells the server where to start fetching the next set of results, in a multi-page response."
+        },
+        "game":{
+          "type":"string",
+          "description":"Game name. (Game names can be retrieved with the Search Games endpoint.) If this is specified, top clips for only this game are returned; otherwise, top clips for all games are returned. If both channel and game are specified, game is ignored."
+        },
+        "language":{
+          "type":"string",
+          "description":"Comma-separated list of languages, which constrains the languages of videos returned. Examples: es, en,es,th. If no language is specified, all languages are returned. Default: \"\". Maximum: 28 languages."
+        },
+        "limit":{
+          "type":"long",
+          "description":"Maximum number of most-recent objects to return. Default: 10. Maximum: 100."
+        },
+        "period":{
+          "type":"string",
+          "description":"The window of time to search for clips. Valid values: day, week, month, all. Default: week."
+        },
+        "trending":{
+          "type":"boolean",
+          "description":"If true, the clips returned are ordered by popularity; otherwise, by viewcount. Default: false."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/clips/top",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/clips/#get-top-clips"
+    }
+  },
+  "kraken/clips/followed":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"long",
+          "description":"Maximum number of most-recent objects to return. Default: 10. Maximum: 100."
+        },
+        "cursor":{
+          "type":"string",
+          "description":"Tells the server where to start fetching the next set of results, in a multi-page response."
+        },
+        "trending":{
+          "type":"boolean",
+          "description":"If true, the clips returned are ordered by popularity; otherwise, by viewcount. Default: false."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/clips/followed",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/clips/#get-followed-clips",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user_read"]
+      }
+    }
+  },
+  "kraken/collections/<collection ID>":{
+    "get":{
+      "path": {
+        "<collection ID>": {
+          "type": "string",
+          "description": "Collection ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/collections/<collection ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/collections/#get-collection-metadata"
+    },
+    "put":{
+      "path": {
+        "<collection ID>": {
+          "type": "string",
+          "description": "Collection ID"
+        }
+      },
+      "url":"PUT https://api.twitch.tv/kraken/collections/<collection ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/collections/#update-collection",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["collections_edit"]
+      }
+    },
+    "delete":{
+      "path": {
+        "<collection ID>": {
+          "type": "string",
+          "description": "Collection ID"
+        }
+      },
+      "url":"DELETE https://api.twitch.tv/kraken/collections/<collection ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/collections/#delete-collection",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["collections_edit"]
+      }
+    }
+  },
+  "kraken/collections/<collection ID>/items":{
+    "get":{
+      "optional_query":{
+        "include_all_items":{
+          "type":"boolean",
+          "description":"If true, unwatchable VODs (private and/or in-process) are included in the response. Default: false."
+        }
+      },
+      "path": {
+        "<collection ID>": {
+          "type": "string",
+          "description": "Collection ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/collections/<collection ID>/items",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/collections/#get-collection"
+    },
+    "post":{
+      "path": {
+        "<collection ID>": {
+          "type": "string",
+          "description": "Collection ID"
+        }
+      },
+      "url":"POST https://api.twitch.tv/kraken/collections/<collection ID>/items",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/collections/#add-item-to-collection",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["collections_edit"]
+      }
+    }
+  },
+  "kraken/channels/<channel ID>/collections":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"long",
+          "description":"Maximum number of most-recent objects to return. Default: 10. Maximum: 100."
+        },
+        "cursor":{
+          "type":"string",
+          "description":"Tells the server where to start fetching the next set of results in a multi-page response."
+        },
+        "containing_item":{
+          "type":"video:<video ID>",
+          "description":"Returns only collections containing the specified video. Note this uses a video ID, not a collection item ID. Example: video:89917098."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/channels/<channel ID>/collections",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/collections/#get-collections-by-channel"
+    },
+    "post":{
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"POST https://api.twitch.tv/kraken/channels/<channel ID>/collections",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/collections/#create-collection",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["collections_edit"]
+      }
+    }
+  },
+  "kraken/collections/<collection ID>/thumbnail":{
+    "put":{
+      "path": {
+        "<collection ID>": {
+          "type": "string",
+          "description": "Collection ID"
+        }
+      },
+      "url":"PUT https://api.twitch.tv/kraken/collections/<collection ID>/thumbnail",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/collections/#create-collection-thumbnail",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["collections_edit"]
+      }
+    }
+  },
+  "kraken/collections/<collection ID>/items/<collection item ID>":{
+    "delete":{
+      "path": {
+        "<collection ID>": {
+          "type": "string",
+          "description": "Collection ID"
+        },
+        "<collection item ID>": {
+          "type": "string",
+          "description": "Collection Item ID"
+        }
+      },
+      "url":"DELETE https://api.twitch.tv/kraken/collections/<collection ID>/items/<collection item ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/collections/#delete-item-from-collection",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["collections_edit"]
+      }
+    },
+    "put":{
+      "path": {
+        "<collection ID>": {
+          "type": "string",
+          "description": "Collection ID"
+        },
+        "<collection item ID>": {
+          "type": "string",
+          "description": "Collection Item ID"
+        }
+      },
+      "url":"PUT https://api.twitch.tv/kraken/collections/<collection ID>/items/<collection item ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/collections/#move-item-within-collection",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["collections_edit"]
+      }
+    }
+  },
+  "kraken/games/top":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Default: 10. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/games/top",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/games/#get-top-games"
+    }
+  },
+  "kraken/ingests":{
+    "get":{
+      "url":"GET https://api.twitch.tv/kraken/ingests"
+    }
+  },
+  "kraken/search/channels":{
+    "get":{
+      "required_query": {
+        "query": {
+          "type": "string",
+          "description": "URL encoded search query"
+        }
+      },
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return, sorted by number of followers. Default: 25. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/search/channels",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/search/#search-channels"
+    }
+  },
+  "kraken/search/games":{
+    "get":{
+      "required_query": {
+        "query": {
+          "type": "string",
+          "description": "URL encoded search query"
+        }
+      },
+      "optional_query":{
+        "live":{
+          "type":"boolean",
+          "description":"If true, returns only games that are live on at least one channel. Default: false."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/search/games",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/search/#search-games"
+    }
+  },
+  "kraken/search/streams":{
+    "get":{
+      "required_query": {
+        "query": {
+          "type": "string",
+          "description": "URL encoded search query"
+        }
+      },
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return, sorted by number of current viewers. Default: 25. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        },
+        "hls":{
+          "type":"boolean",
+          "description":"If true, returns only HLS streams; if false, only RTMP streams; if not set, both HLS and RTMP streams. HLS is HTTP Live Streaming, a live-streaming communications protocol. RTMP is Real-Time Media Protocol, an industry standard for moving video around a network. Default: not set."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/search/streams"
+    }
+  },
+  "kraken/streams/<channel ID>":{
+    "get":{
+      "optional_query":{
+        "stream_type":{
+          "type":"string",
+          "description":"Constrains the type of streams returned. Valid values: live, playlist, all. Playlists are offline streams of VODs (Video on Demand) that appear live. Default: live."
+        }
+      },
+      "path": {
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/streams/<channel ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/streams/#get-stream-by-user"
+    }
+  },
+  "kraken/streams/":{
+    "get":{
+      "optional_query":{
+        "channel":{
+          "type":"comma-separated list of channel IDs",
+          "description":"Constrains the channel(s) of the streams returned."
+        },
+        "game":{
+          "type":"string",
+          "description":"Constrains the game of the streams returned."
+        },
+        "language":{
+          "type":"string",
+          "description":"Constrains the language of the streams returned. Valid value: a locale ID string; for example, en, fi, es-mx. Only one language can be specified. Default: all languages."
+        },
+        "stream_type":{
+          "type":"string",
+          "description":"Constrains the type of streams returned. Valid values: live, playlist, all. Playlists are offline streams of VODs (Video on Demand) that appear live. Default: live."
+        },
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return, sorted by number of viewers. Default: 25. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/streams/",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/streams/#get-live-streams"
+    }
+  },
+  "kraken/streams/summary":{
+    "get":{
+      "optional_query":{
+        "game":{
+          "type":"string",
+          "description":"Constrains the game of the streams returned."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/streams/summary",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/streams/#get-streams-summary"
+    }
+  },
+  "kraken/streams/featured":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return, sorted by priority. Default: 25. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/streams/featured",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/streams/#get-featured-streams"
+    }
+  },
+  "kraken/streams/followed":{
+    "get":{
+      "optional_query":{
+        "stream_type":{
+          "type":"string",
+          "description":"Constrains the type of streams returned. Valid values: live, playlist, all. Playlists are offline streams of VODs (Video on Demand) that appear live. Default: live."
+        },
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Default: 25. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/streams/followed",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/streams/#get-followed-streams",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user_read"]
+      }
+    }
+  },
+  "kraken/teams":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return, sorted by creation date. Default: 25. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/teams",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/teams/#get-all-teams"
+    }
+  },
+  "kraken/teams/<team name>":{
+    "get":{
+      "path": {
+        "<team name>": {
+          "type": "string",
+          "description": "Team Name"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/teams/<team name>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/teams/#get-team"
+    }
+  },
+  "kraken/user": {
+    "get": {
+      "url": "GET https://api.twitch.tv/kraken/user",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#get-user",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user_read"]
+      }
+    }
+  },
+  "kraken/users/<user ID>":{
+    "get":{
+      "path": {
+        "<user ID>": {
+          "type": "string",
+          "description": "User ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/users/<user ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#get-user-by-id"
+    }
+  },
+  "kraken/users":{
+    "get":{
+      "required_query": {
+        "login": {
+          "type": "CSV",
+          "description": "User IDs, seperated by comma"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/users",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#get-users"
+    }
+  },
+  "kraken/users/<user ID>/emotes":{
+    "get":{
+      "path": {
+        "<user ID>": {
+          "type": "string",
+          "description": "User ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/users/<user ID>/emotes",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#get-user-emotes",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user_subscriptions"]
+      }
+    }
+  },
+  "kraken/users/<user ID>/subscriptions/<channel ID>":{
+    "get":{
+      "path": {
+        "<user ID>": {
+          "type": "string",
+          "description": "User ID"
+        },
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/users/<user ID>/subscriptions/<channel ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#check-user-subscription-by-channel",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user_subscriptions"]
+      }
+    }
+  },
+  "kraken/users/<user ID>/follows/channels":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of most-recent objects to return. Default: 25. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        },
+        "direction":{
+          "type":"string",
+          "description":"Sorting direction. Valid values: asc, desc. Default: desc (newest first)."
+        },
+        "sortby":{
+          "type":"string",
+          "description":"Sorting key. Valid values: created_at, last_broadcast, login. Default: created_at."
+        }
+      },
+      "path": {
+        "<user ID>": {
+          "type": "string",
+          "description": "User ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/users/<user ID>/follows/channels",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#get-user-follows"
+    }
+  },
+  "kraken/users/<user ID>/follows/channels/<channel ID>":{
+    "get":{
+      "path": {
+        "<user ID>": {
+          "type": "string",
+          "description": "User ID"
+        },
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/users/<user ID>/follows/channels/<channel ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#check-user-follows-by-channel"
+    },
+    "put":{
+      "path": {
+        "<user ID>": {
+          "type": "string",
+          "description": "User ID"
+        },
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"PUT https://api.twitch.tv/kraken/users/<user ID>/follows/channels/<channel ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#follow-channel",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user_follows_edit"]
+      }
+    },
+    "delete":{
+      "path": {
+        "<user ID>": {
+          "type": "string",
+          "description": "User ID"
+        },
+        "<channel ID>": {
+          "type": "string",
+          "description": "Channel ID"
+        }
+      },
+      "url":"DELETE https://api.twitch.tv/kraken/users/<user ID>/follows/channels/<channel ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#unfollow-channel",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user_follows_edit"]
+      }
+    }
+  },
+  "kraken/users/<user ID>/blocks":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects in array. Default: 25. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination. Default: 0."
+        }
+      },
+      "path": {
+        "<user ID>": {
+          "type": "string",
+          "description": "User ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/users/<user ID>/blocks",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#get-user-block-list"
+    }
+  },
+  "kraken/users/<source user ID>/blocks/<target user ID>":{
+    "put":{
+      "path": {
+        "<source user ID>": {
+          "type": "string",
+          "description": "Source User ID"
+        },
+        "<target user ID>": {
+          "type": "string",
+          "description": "Target User ID"
+        }
+      },
+      "url":"PUT https://api.twitch.tv/kraken/users/<source user ID>/blocks/<target user ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#block-user",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user_blocks_edit"]
+      }
+    },
+    "delete":{
+      "path": {
+        "<source user ID>": {
+          "type": "string",
+          "description": "Source User ID"
+        },
+        "<target user ID>": {
+          "type": "string",
+          "description": "Target User ID"
+        }
+      },
+      "url":"DELETE https://api.twitch.tv/kraken/users/<source user ID>/blocks/<target user ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#unblock-user",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user_blocks_edit"]
+      }
+    }
+  },
+  "kraken/user/vhs": {
+    "put": {
+      "required_body": {
+        "identifier": {
+          "type": "string",
+          "description": "Game user"
+        }
+      },
+      "url": "PUT https://api.twitch.tv/kraken/user/vhs",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#create-user-connection-to-viewer-heartbeat-service-vhs",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["viewing_activity_read"]
+      }
+    },
+    "get": {
+      "url": "GET https://api.twitch.tv/kraken/user/vhs",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#check-user-connection-to-viewer-heartbeat-service-vhs",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user_read"]
+      }
+    },
+    "delete": {
+      "url": "DELETE https://api.twitch.tv/kraken/user/vhs",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/users/#delete-user-connection-to-viewer-heartbeat-service-vhs",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["viewing_activity_read"]
+      }
+    }
+  },
+  "kraken/videos/<video ID>":{
+    "get":{
+      "path": {
+        "<video ID>": {
+          "type": "string",
+          "description": "Video ID"
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/videos/<video ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/videos/#get-video"
+    },
+    "put":{
+      "optional_query":{
+        "description":{
+          "type":"string",
+          "description":"Short description of the video."
+        },
+        "game":{
+          "type":"string",
+          "description":"Name of the game in the video."
+        },
+        "language":{
+          "type":"string",
+          "description":"Language of the video (for example, en)."
+        },
+        "tag_list":{
+          "type":"string",
+          "description":"Comma-separated list of tags describing the video (for example, \u201cairplanes,scary\u201d). Maximum: 100 characters per tag, 500 characters for the entire list."
+        },
+        "title":{
+          "type":"string",
+          "description":"Title of the video. Maximum 100 characters."
+        }
+      },
+      "path": {
+        "<video ID>": {
+          "type": "string",
+          "description": "Video ID"
+        }
+      },
+      "url":"PUT https://api.twitch.tv/kraken/videos/<video ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/videos/#update-video",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_editor"]
+      }
+    },
+    "delete":{
+      "path": {
+        "<video ID>": {
+          "type": "string",
+          "description": "Video ID"
+        }
+      },
+      "url":"DELETE https://api.twitch.tv/kraken/videos/<video ID>",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/videos/#delete-video",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_editor"]
+      }
+    }
+  },
+  "kraken/videos/top":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Default: 10. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of reults. Default: 0. Maximum: 500."
+        },
+        "game":{
+          "type":"string",
+          "description":"Constrains videos by game. A game name can be retrieved using the Search Games endpoint."
+        },
+        "period":{
+          "type":"string",
+          "description":"Specifies the window of time to search. Valid values: week, month, all. Default: week"
+        },
+        "broadcast_type":{
+          "type":"comma-separated list",
+          "description":"Constrains the type of videos returned. Valid values: (any combination of) archive, highlight, upload, Default: all types (no filter)."
+        },
+        "language":{
+          "type":"comma-separated list",
+          "description":"Constrains the languages of videos returned. Examples: es, en,es,th. If no language is specified, all languages are returned. Default: \"\"."
+        },
+        "sort":{
+          "type":"string",
+          "description":"Valid values:* time: Videos are sorted by publication time, most recent first.* views: Videos are sorted by view count, in descending order."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/videos/top",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/videos/#get-top-videos"
+    }
+  },
+  "kraken/videos/followed":{
+    "get":{
+      "optional_query":{
+        "limit":{
+          "type":"integer",
+          "description":"Maximum number of objects to return, sorted by creation date. Default: 10. Maximum: 100."
+        },
+        "offset":{
+          "type":"integer",
+          "description":"Object offset for pagination of results. Default: 0."
+        },
+        "broadcast_type":{
+          "type":"comma-separated list",
+          "description":"Constrains the type of videos returned. Valid values: (any combination of) archive, highlight, upload. Default: all types (no filter)."
+        },
+        "language":{
+          "type":"comma-separated list",
+          "description":"Constrains the languages of videos returned. Examples: es, en,es,th. If no language is specified, all languages are returned. Default: \"\"."
+        },
+        "sort":{
+          "type":"string",
+          "description":"Valid values:* time: Videos are sorted by publication time, most recent first.* views: Videos are sorted by view count, in descending order."
+        }
+      },
+      "url":"GET https://api.twitch.tv/kraken/videos/followed",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/videos/#get-followed-videos",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user_read"]
+      }
+    }
+  },
+  "kraken/videos":{
+    "post":{
+      "required_query": {
+        "channel_id": {
+          "type": "string",
+          "description": "Channel ID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the video"
+        }
+      },
+      "optional_query":{
+        "description":{
+          "type":"string",
+          "description":"Short description of the video."
+        },
+        "game":{
+          "type":"string",
+          "description":"Name of the game in the video."
+        },
+        "language":{
+          "type":"string",
+          "description":"Language of the video (for example, en)."
+        },
+        "tag_list":{
+          "type":"string",
+          "description":"Comma-separated list of tags describing the video (for example, \u201cairplanes,scary\u201d). Maximum: 100 characters per tag, 500 characters for the entire list."
+        },
+        "viewable":{
+          "type":"string",
+          "description":"Specifies who can view the video. Valid values: public (the video is viewable by everyone) or private (the video is viewable only by the owner and channel editors). Default: public."
+        },
+        "viewable_at":{
+          "type":"RFC3339 date",
+          "description":"Date when the video will become public. This takes effect only if viewable=private."
+        }
+      },
+      "url":"POST https://api.twitch.tv/kraken/videos",
+      "docs": "https://dev.twitch.tv/docs/v5/reference/videos/#create-video",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel_editor"]
+      }
+    }
+  }
+}

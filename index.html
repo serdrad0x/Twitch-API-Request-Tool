@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Twitch API Request Tool</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="The Twitch API Tool is a website to give developers and interested users an easy way to communicate with the Twitch API. With the documentation at hand, you can debug any type of request in no time!">
+	<link rel="stylesheet" href="css/purgecss/bootstrap-4.3.1.css">
+	<link rel="stylesheet" href="css/purgecss/bootstrap-select.css">
+	<link rel="stylesheet" href="css/purgecss/BsMultiSelect.css">
+	<link rel="stylesheet" href="css/purgecss/index.css">
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap-4.3.1.min.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/BsMultiSelect.min.js"></script>
+	<script src="js/i18n/defaults-en_US.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col">
+			<div class="row">
+				<div id="scope_div" class="col">
+					<label for="scope">Scope</label>
+					<select name="states" id="scope" class="form-control" multiple="multiple" style="display: none;">
+
+					</select>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<!--Client ID-->
+				<div class="col-md-6 col-sm-12">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text spanSize">Client ID</span>
+						</div>
+						<input type="text" class="form-control" id="client_id" placeholder="Client ID" aria-label="Client ID">
+						<div class="input-group-append">
+							<button id="generateToken" type="button" class="btn btn-outline-dark btn-block btnSize">Generate</button>
+						</div>
+					</div>
+				</div>
+
+				<!--User Access Token-->
+				<div class="col-md-6 col-sm-12">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">User Access Token</span>
+						</div>
+						<input type="password" class="form-control" id="token_used" placeholder="User Access Token" aria-label="User Access Token">
+						<div class="input-group-append">
+							<button type="button" id="visibility" class="btn btn-outline-dark btn-block">Show</button>
+						</div>
+						<div class="input-group-append">
+							<button type="button" id="token_revoke" class="btn btn-outline-dark btn-block">Revoke</button>
+						</div>
+						<div class="input-group-append">
+							<button type="button" id="token_validate" class="btn btn-outline-dark btn-block btnSize">Validate</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 col-sm-12">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text spanSize">Username</span>
+				</div>
+				<input type="text" class="form-control" id="username" placeholder="Username" aria-label=Username"">
+				<div class="input-group-append">
+					<button type="button" id="getID" class="btn btn-outline-dark btn-block btnSize">Get ID</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text spanSize">User ID</span>
+				</div>
+				<input type="text" class="form-control" id="userid" placeholder="User ID" aria-label="User ID">
+				<div class="input-group-append">
+					<button type="button" id="getName" class="btn btn-outline-dark btn-block">Get Name</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-2">
+			<select onchange="" id="api_type" class="selectpicker w-100" aria-label="API">
+				<option value="helix">Helix</option>
+				<option value="kraken">Kraken</option>
+			</select>
+		</div>
+		<!--API Request-->
+		<div class="col-2">
+			<select onchange="setType(this)" id="request_type" class="selectpicker w-100" aria-label="Request methods">
+
+			</select>
+		</div>
+		<div class="col-8">
+			<select onchange="setEntryPoint(this)" id="api_request" class="selectpicker w-100" data-live-search="true" aria-label="Entry point">
+
+			</select>
+		</div>
+	</div>
+
+	<!-- Path -->
+	<div id="path" class="row">
+
+	</div>
+
+	<!--Required Parameters-->
+	<div id="required_query" class="row">
+
+	</div>
+
+	<!--Optional Parameters-->
+	<div id="optional_query" class="row">
+
+	</div>
+
+	<!--Required Body-->
+	<div id="required_body" class="row">
+
+	</div>
+
+	<!--Optional Body-->
+	<div id="optional_body" class="row">
+
+	</div>
+
+	<!--Send Request-->
+	<br>
+	<div class="row">
+		<div class="col">
+			<div class="input-group mb-3">
+			 	<input oninput="requestParser(this)" id="request" type="text" class="form-control" aria-label="Request">
+				<div class="input-group-append">
+					<button id="send" class="btn btn-outline-dark btn-block btnSize" type="button">Send</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!--Result-->
+		<div class="col-md-8 col-xs-12">
+			<strong>Result:</strong><br><br>
+			<pre id="api_result">&nbsp;</pre>
+		</div>
+		<div class="col-md-4 col-xs-12">
+			<div class="row">
+				<div class="col" id="path_docu">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col" id="required_query_docu">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col" id="optional_query_docu">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col" id="required_body_docu">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col" id="optional_body_docu">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col" id="param_result_docu">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col" id="need_scope_docu">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col" id="response_docu">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col" id="code_status_docu">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col" id="twitch_api_docu">
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="text-center">
+			<hr>
+			<p><a target="_blank" href="https://twitch.tv/serdrad0x">Serdrad0x</a> | <a href="#" target="_blank">GitHub</a> | <a href="https://discord.gg/Q7tmkmv" target="_blank">Discord</a> | <a href="howto.html">Howto</a> | Not associated with Twitch! Unofficial API Request Tool!</p>
+		</div>
+	</footer>
+</div>
+<script src="js/index.min.js"></script>
+</body>
+</html>

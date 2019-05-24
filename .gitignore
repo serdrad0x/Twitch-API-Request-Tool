@@ -1,0 +1,9 @@
+# IntelliJ project files
+.idea
+
+# Minified&Map files
+/css/purgecss
+/js/*.min.js
+/js/*.map
+/js/i18n/*.min.js
+/js/i18n/*.map

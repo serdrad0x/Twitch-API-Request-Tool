@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Twitch API Request Tool - Howto</title>
+	<meta name="description" content="">
+	<link rel="stylesheet" href="css/purgecss/bootstrap-4.3.1.css">
+	<script src="js/bootstrap-4.3.1.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col">
+			<h3>How to get my Client ID?</h3>
+			<p>
+				To get your Client ID, you have to visit <a href="https://dev.twitch.tv/console/apps/create" target="_blank">https://dev.twitch.tv/console/apps/create</a> and
+				register your application. Don't worry, you don't need your own application. In this case, the Twitch API Request Tool will be your application.
+
+				The following information are required:
+			</p>
+
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th>Field</th>
+					<th>Description</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>Name</td>
+					<td>Feel free to choose any name you like!</td>
+				</tr>
+				<tr>
+					<td>OAuth Redirect URL</td>
+					<td>You have to add the following: http://tart.retro-elite.de/index.html</td>
+				</tr>
+				<tr>
+					<td>Category</td>
+					<td>Should be: Website Integration</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<p>
+				Now you should be redirected to your application management page where you can find your Client-ID! It is a string of random alphanumeric characters.
+				Copy this string back to the TART and put it in the field "Client ID".
+			</p>
+
+			<h3>How to get my User Access Token</h3>
+			<p>
+				To get your User Access Token, first of all you need a Client ID. You don't have a Client ID yet? Go back to "How to get my Client ID?" and start over.
+				Otherwise, you simply have to press the "Generate" button next to your Client ID.
+				You will be redirected to an authentication site of Twitch to confirm your granted access. The scopes you have selected
+				define the level of access.
+			</p>
+
+			<h3>What are scopes?</h3>
+			<p>
+				To execute some of the requests, you need special privileges. These are defined by the scopes you choose from the scope selection.
+				After you choose your scopes, you have to generate a new Access Token!
+			</p>
+
+			<h3>Validate my Access Token?</h3>
+			<p>
+				You can validate your Access Token and check, which Client ID is associated with this token and which scopes are active.
+			</p>
+
+			<h3>Revoke my Access Token?</h3>
+			<p>
+				Your Access Token should be treated like a password! Never give anybody access to your access token you don't trust.
+				Therefore it is good practice to revoke your access token after you finished testing around!
+			</p>
+
+			<h3>I don't trust you but would like to use TART?</h3>
+			<p>
+				No problem, just visit the GitHub repository and take a look at the source. Feel free to download the project and execute it local on your own machine.
+				The complete project is written in javascript, your browser should have no problems to run it. Keep in mind you have to make some changes to the
+				source to run it local!<br>
+				It is not ok to host TART online on any other platform without permission! So be nice and ask.<br><br>
+
+				If you think, there are any shady additions to the other files, you can download them from their representative developer:
+			</p>
+
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th>Name + Version</th>
+					<th>Website</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>Bootstrap 4.3.1</td>
+					<td>https://www.bootstrapcdn.com/</td>
+				</tr>
+				<tr>
+					<td>bootstrap-select 1.13.10</td>
+					<td>https://developer.snapappointments.com/bootstrap-select/</td>
+				</tr>
+				<tr>
+					<td>BsMultiSelect 0.2.22</td>
+					<td>https://github.com/DashboardCode/BsMultiSelect</td>
+				</tr>
+				<tr>
+					<td>jQuery 3.4.1</td>
+					<td>https://jquery.com/</td>
+				</tr>
+				<tr>
+					<td>popper 1.15.0</td>
+					<td>https://popper.js.org/</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<h3>Disclaimer</h3>
+			<p>
+				The Twitch API Request Tool is an unofficial tool to request the Twitch API. It is by no means associated with Twitch!
+			</p>
+
+		</div>
+	</div>
+	<footer>
+		<div class="text-center">
+			<hr>
+			<p><a target="_blank" href="https://twitch.tv/serdrad0x">Serdrad0x</a> | <a href="#" target="_blank">GitHub</a> | <a href="https://discord.gg/Q7tmkmv" target="_blank">Discord</a> | <a href="index.html">Twitch API Request Tool</a> | Not associated with Twitch! Unofficial API Request Tool!</p>
+		</div>
+	</footer>
+</div>
+</body>
+</html>

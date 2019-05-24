@@ -1,0 +1,1376 @@
+{
+  "helix/analytics/extensions":{
+    "get":{
+      "optional_query":{
+        "after":{
+          "type":"string",
+          "description":"Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response. This applies only to queries without extension_id. If an extension_id is specified, it supersedes any cursor/offset combinations. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "ended_at":{
+          "type":"string",
+          "description":"Ending date/time for returned reports, in RFC3339 format with the hours, minutes, and seconds zeroed out and the UTC timezone: YYYY-MM-DDT00:00:00Z. The report covers the entire ending date; e.g., if 2018-05-01T00:00:00Z is specified, the report covers up to 2018-05-01T23:59:59Z.If this is provided, started_at also must be specified. If ended_at is later than the default end date, the default date is used. Default: 1-2 days before the request was issued (depending on report availability)."
+        },
+        "extension_id":{
+          "type":"string",
+          "description":"Client ID value assigned to the extension when it is created. If this is specified, the returned URL points to an analytics report for just the specified extension. If this is not specified, the response includes multiple URLs (paginated), pointing to separate analytics reports for each of the authenticated user\u2019s extensions."
+        },
+        "first":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Maximum: 100. Default: 20."
+        },
+        "started_at":{
+          "type":"string",
+          "description":"Starting date/time for returned reports, in RFC3339 format with the hours, minutes, and seconds zeroed out and the UTC timezone: YYYY-MM-DDT00:00:00Z. This must be on or after January 31, 2018.If this is provided, ended_at also must be specified. If started_at is earlier than the default start date, the default date is used. Default: January 31, 2018 (overview_v2) or 90 days (overview_v1) before the report was issued. The file contains one row of data per day."
+        },
+        "type":{
+          "type":"string",
+          "description":"Type of analytics report that is returned. If this is specified, the response includes one URL, for the specified report type. If this is not specified, the response includes multiple URLs (paginated), one for each report type available for the authenticated user\u2019s Extensions. Limit: 1. Valid values: \"overview_v1\", \"overview_v2\". Default: all report types for the authenticated user\u2019s Extensions."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/analytics/extensions",
+      "response":{
+        "ended_at":{
+          "type":"string",
+          "description":"Report end date/time."
+        },
+        "extension_id":{
+          "type":"string",
+          "description":"ID of the extension whose analytics data is being provided."
+        },
+        "pagination":{
+          "type":"string",
+          "description":"A cursor value, to be used in a subsequent request to specify the starting point of the next set of results. This is returned only if extension_id is not specified in the request."
+        },
+        "started_at":{
+          "type":"string",
+          "description":"Report start date/time. Note this may differ from (be later than) the started_at value in the request; the response value is the date when data for the extension is available."
+        },
+        "type":{
+          "type":"string",
+          "description":"Type of report."
+        },
+        "url":{
+          "type":"string",
+          "description":"URL to the downloadable CSV file containing analytics data. Valid for 5 minutes."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-extension-analytics",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["analytics:read:extensions"]
+      }
+    }
+  },
+  "helix/analytics/games":{
+    "get":{
+      "optional_query":{
+        "after":{
+          "type":"string",
+          "description":"Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response. This applies only to queries without game_id. If a game_id is specified, it supersedes any cursor/offset combinations. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "ended_at":{
+          "type":"string",
+          "description":"Ending date/time for returned reports, in RFC3339 format with the hours, minutes, and seconds zeroed out and the UTC timezone: YYYY-MM-DDT00:00:00Z. The report covers the entire ending date; e.g., if 2018-05-01T00:00:00Z is specified, the report covers up to 2018-05-01T23:59:59Z.If this is provided, started_at also must be specified. If ended_at is later than the default end date, the default date is used. Default: 1-2 days before the request was issued (depending on report availability)."
+        },
+        "first":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Maximum: 100. Default: 20."
+        },
+        "game_id":{
+          "type":"string",
+          "description":"Game ID. If this is specified, the returned URL points to an analytics report for just the specified game. If this is not specified, the response includes multiple URLs (paginated), pointing to separate analytics reports for each of the authenticated user\u2019s games."
+        },
+        "started_at":{
+          "type":"string",
+          "description":"Starting date/time for returned reports, in RFC3339 format with the hours, minutes, and seconds zeroed out and the UTC timezone: YYYY-MM-DDT00:00:00Z.If this is provided, ended_at also must be specified. If started_at is earlier than the default start date, the default date is used. Default: 365 days (overview_v2) or 90 days (overview_v1) before the report was issued. The file contains one row of data per day."
+        },
+        "type":{
+          "type":"string",
+          "description":"Type of analytics report that is returned. If this is specified, the response includes one URL, for the specified report type. If this is not specified, the response includes multiple URLs (paginated), one for each report type available for the authenticated user\u2019s games. Limit: 1. Valid values: \"overview_v1\", \"overview_v2\". Default: all report types for the authenticated user\u2019s games."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/analytics/games",
+      "response":{
+        "ended_at":{
+          "type":"string",
+          "description":"Report end date/time."
+        },
+        "game_id":{
+          "type":"string",
+          "description":"ID of the game whose analytics data is being provided."
+        },
+        "pagination":{
+          "type":"string",
+          "description":"A cursor value, to be used in a subsequent request to specify the starting point of the next set of results. This is returned only if game_id is not specified in the request."
+        },
+        "started_at":{
+          "type":"string",
+          "description":"Report start date/time."
+        },
+        "type":{
+          "type":"string",
+          "description":"Type of report."
+        },
+        "url":{
+          "type":"string",
+          "description":"URL to the downloadable CSV file containing analytics data. Valid for 5 minutes."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-game-analytics",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["analytics:read:games"]
+      }
+    }
+  },
+  "helix/bits/leaderboard":{
+    "get":{
+      "optional_query":{
+        "count":{
+          "type":"integer",
+          "description":"Number of results to be returned. Maximum: 100. Default: 10."
+        },
+        "period":{
+          "type":"string",
+          "description":"Time period over which data is aggregated (PST time zone). This parameter interacts with started_at. Valid values are given below. Default: \"all\".\"day\" \u2013 00:00:00 on the day specified in started_at, through 00:00:00 on the following day.\"week\" \u2013 00:00:00 on Monday of the week specified in started_at, through 00:00:00 on the following Monday.\"month\" \u2013 00:00:00 on the first day of the month specified in started_at, through 00:00:00 on the first day of the following month.\"year\" \u2013 00:00:00 on the first day of the year specified in started_at, through 00:00:00 on the first day of the following year.\"all\" \u2013 The lifetime of the broadcaster's channel. If this is specified (or used by default), started_at is ignored."
+        },
+        "started_at":{
+          "type":"string",
+          "description":"Timestamp for the period over which the returned data is aggregated. Must be in RFC 3339 format. If this is not provided, data is aggregated over the current period; e.g., the current day/week/month/year. This value is ignored if period is \"all\".Any + operator should be URL encoded.Currently, the HH:MM:SS part of this value is used only to identify a given day in PST and otherwise ignored. For example, if the started_at value resolves to 5PM PST yesterday and period is \"day\", data is returned for all of yesterday."
+        },
+        "user_id":{
+          "type":"string",
+          "description":"ID of the user whose results are returned; i.e., the person who paid for the Bits.As long as count is greater than 1, the returned data includes additional users, with Bits amounts above and below the user specified by user_id.If user_id is not provided, the endpoint returns the Bits leaderboard data across top users (subject to the value of count)."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/bits/leaderboard",
+      "response":{
+        "ended_at":{
+          "type":"string",
+          "description":"End of the date range for the returned data."
+        },
+        "rank":{
+          "type":"integer",
+          "description":"Leaderboard rank of the user."
+        },
+        "score":{
+          "type":"integer",
+          "description":"Leaderboard score (number of Bits) of the user."
+        },
+        "started_at":{
+          "type":"string",
+          "description":"Start of the date range for the returned data."
+        },
+        "total":{
+          "type":"integer",
+          "description":"Total number of results (users) returned. This is count or the total number of entries in the leaderboard, whichever is less."
+        },
+        "user_id":{
+          "type":"string",
+          "description":"ID of the user (viewer) in the leaderboard entry."
+        },
+        "user_name":{
+          "type":"string",
+          "description":"Display name corresponding to user_id."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-bits-leaderboard",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["bits:read"]
+      }
+    }
+  },
+  "helix/clips":{
+    "post":{
+      "required_query":{
+        "broadcaster_id":{
+          "type":"string",
+          "description":"ID of the stream from which the clip will be made."
+        }
+      },
+      "optional_query":{
+        "has_delay":{
+          "type":"boolean",
+          "description":"If false, the clip is captured from the live stream when the API is called; otherwise, a delay is added before the clip is captured (to account for the brief delay between the broadcaster\u2019s stream and the viewer\u2019s experience of that stream). Default: false."
+        }
+      },
+      "url":"POST https://api.twitch.tv/helix/clips",
+      "response":{
+        "edit_url":{
+          "type":"string",
+          "description":"URL of the edit page for the clip."
+        },
+        "id":{
+          "type":"string",
+          "description":"ID of the clip that was created."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#create-clip",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["clips:edit"]
+      }
+    },
+    "get":{
+      "required_query":{
+        "broadcaster_id":{
+          "type":"string",
+          "description":"ID of the broadcaster for whom clips are returned. The number of clips returned is determined by the first query-string parameter (default: 20). Results are ordered by view count."
+        },
+        "game_id":{
+          "type":"string",
+          "description":"ID of the game for which clips are returned. The number of clips returned is determined by the first query-string parameter (default: 20). Results are ordered by view count."
+        },
+        "id":{
+          "type":"string",
+          "description":"ID of the clip being queried. Limit: 100."
+        }
+      },
+      "optional_query":{
+        "after":{
+          "type":"string",
+          "description":"Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response. This applies only to queries specifying broadcaster_id or game_id. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "before":{
+          "type":"string",
+          "description":"Cursor for backward pagination: tells the server where to start fetching the next set of results, in a multi-page response. This applies only to queries specifying broadcaster_id or game_id. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "ended_at":{
+          "type":"string",
+          "description":"Ending date/time for returned clips, in RFC3339 format. (Note that the seconds value is ignored.) If this is specified, started_at also must be specified; otherwise, the time period is ignored."
+        },
+        "first":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Maximum: 100. Default: 20."
+        },
+        "started_at":{
+          "type":"string",
+          "description":"Starting date/time for returned clips, in RFC3339 format. (Note that the seconds value is ignored.) If this is specified, ended_at also should be specified; otherwise, the ended_at date/time will be 1 week after the started_at value."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/clips",
+      "response":{
+        "broadcaster_id":{
+          "type":"string",
+          "description":"User ID of the stream from which the clip was created."
+        },
+        "broadcaster_name":{
+          "type":"string",
+          "description":"Display name corresponding to broadcaster_id."
+        },
+        "created_at":{
+          "type":"string",
+          "description":"Date when the clip was created."
+        },
+        "creator_id":{
+          "type":"string",
+          "description":"ID of the user who created the clip."
+        },
+        "creator_name":{
+          "type":"string",
+          "description":"Display name corresponding to creator_id."
+        },
+        "embed_url":{
+          "type":"string",
+          "description":"URL to embed the clip."
+        },
+        "game_id":{
+          "type":"string",
+          "description":"ID of the game assigned to the stream when the clip was created."
+        },
+        "id":{
+          "type":"string",
+          "description":"ID of the clip being queried."
+        },
+        "language":{
+          "type":"string",
+          "description":"Language of the stream from which the clip was created."
+        },
+        "pagination":{
+          "type":"string",
+          "description":"A cursor value, to be used in a subsequent request to specify the starting point of the next set of results."
+        },
+        "thumbnail_url":{
+          "type":"string",
+          "description":"URL of the clip thumbnail."
+        },
+        "title":{
+          "type":"string",
+          "description":"Title of the clip."
+        },
+        "url":{
+          "type":"string",
+          "description":"URL where the clip can be viewed."
+        },
+        "video_id":{
+          "type":"string",
+          "description":"ID of the video from which the clip was created."
+        },
+        "view_count":{
+          "type":"int",
+          "description":"Number of times the clip has been viewed."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-clips"
+    }
+  },
+  "helix/entitlements/upload":{
+    "post":{
+      "required_query":{
+        "manifest_id":{
+          "type":"string",
+          "description":"Unique identifier of the manifest file to be uploaded. Must be 1-64 characters."
+        },
+        "type":{
+          "type":"string",
+          "description":"Type of entitlement being granted. Only bulk_drops_grant is supported."
+        }
+      },
+      "url":"POST https://api.twitch.tv/helix/entitlements/upload",
+      "response":{
+        "url":{
+          "type":"string",
+          "description":"The URL where you will upload the manifest file. This is the URL of a pre-signed S3 bucket. Lease time: 15 minutes.Note: You must replace all occurrences of \\u0026 with an ampersand (&) character. See the Drops Guide."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#create-entitlement-grants-upload-url",
+      "auth": {
+        "token": "AAT"
+      }
+    }
+  },
+  "helix/entitlements/codes":{
+    "get":{
+      "optional_query": {
+        "code": {
+          "type": "String",
+          "description": "The code to get the status of. Repeat this query parameter additional times to get the status of multiple codes.\nEx: ?code=code1&code=code2\n1-20 code parameters are allowed.",
+          "amount": 20
+        },
+        "user_id": {
+          "type": "Integer",
+          "description": "Represents a numeric Twitch user ID.\nThe user account which is going to receive the entitlement associated with the code.",
+          "amount": 1
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/entitlements/codes",
+      "response":{
+        "data":{
+          "type": "Array of payloads each of which includes code (string) and status (string).",
+          "description": "Indicates the current status of each key when checking key status. Indicates the success or error state of each key when redeeming. See “Code Statuses” section."
+        }
+      },
+      "code_status":{
+        "successfully_redeemed":{
+          "description": "Request successfully redeemed this code to the authenticated user’s account.This status will only ever be encountered when calling the POST API to redeem a key."
+        },
+        "already_claimed":{
+          "description": "Code has already been claimed by a Twitch user."
+        },
+        "expired":{
+          "description": "Code has expired and can no longer be claimed."
+        },
+        "user_not_eligible":{
+          "description": "User is not eligible to redeem this code."
+        },
+        "not_found":{
+          "description": "Code is not valid and/or does not exist in our database."
+        },
+        "inactive":{
+          "description": "Code is not currently active."
+        },
+        "unused":{
+          "description": "Code has not been claimed.This status will only ever be encountered when calling the GET API to get a keys status."
+        },
+        "incorrect_format":{
+          "description": "Code was not properly formatted."
+        },
+        "internal_error":{
+          "description": "Indicates some internal and/or unknown failure handling this code."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-code-status",
+      "auth": {
+        "token": "AAT"
+      }
+    },
+    "post":{
+      "optional_query": {
+        "code": {
+          "type": "String",
+          "description": "The code to redeem to the authenticated user’s account.\n\nA fifteen character (plus optional hyphen separators) alphanumeric string.e.g. ABCDE-12345-FGHIJ\n\nRepeat this query parameter additional times to redeem multiple codes.\nEx: ?code=code1&code=code2\n1-20 code parameters are allowed.",
+          "amount": 20
+        },
+        "user_id": {
+          "type": "Integer",
+          "description": "Represents a numeric Twitch user ID.\nThe user account which is going to receive the entitlement associated with the code.",
+          "amount": 1
+        }
+      },
+      "url":"POST https://api.twitch.tv/helix/entitlements/codes",
+      "response":{
+        "data":{
+          "type": "Array of payloads each of which includes code (string) and status (string).",
+          "description": "Indicates the success or error state of each key when redeeming."
+        }
+      },
+      "code_status":{
+        "successfully_redeemed":{
+          "description": "Request successfully redeemed this code to the authenticated user’s account.This status will only ever be encountered when calling the POST API to redeem a key."
+        },
+        "already_claimed":{
+          "description": "Code has already been claimed by a Twitch user."
+        },
+        "expired":{
+          "description": "Code has expired and can no longer be claimed."
+        },
+        "user_not_eligible":{
+          "description": "User is not eligible to redeem this code."
+        },
+        "not_found":{
+          "description": "Code is not valid and/or does not exist in our database."
+        },
+        "inactive":{
+          "description": "Code is not currently active."
+        },
+        "unused":{
+          "description": "Code has not been claimed.This status will only ever be encountered when calling the GET API to get a keys status."
+        },
+        "incorrect_format":{
+          "description": "Code was not properly formatted."
+        },
+        "internal_error":{
+          "description": "Indicates some internal and/or unknown failure handling this code."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#redeem-code",
+      "auth": {
+        "token": "AAT"
+      }
+    }
+  },
+  "helix/games/top":{
+    "get":{
+      "optional_query":{
+        "after":{
+          "type":"string",
+          "description":"Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "before":{
+          "type":"string",
+          "description":"Cursor for backward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "first":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Maximum: 100. Default: 20."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/games/top",
+      "response":{
+        "box_art_url":{
+          "type":"object",
+          "description":"Template URL for the game\u2019s box art."
+        },
+        "id":{
+          "type":"string",
+          "description":"Game ID."
+        },
+        "name":{
+          "type":"string",
+          "description":"Game name."
+        },
+        "pagination":{
+          "type":"string",
+          "description":"A cursor value, to be used in a subsequent request to specify the starting point of the next set of results."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-top-games"
+    }
+  },
+  "helix/games":{
+    "get":{
+      "required_query":{
+        "id":{
+          "type":"string",
+          "description":"Game ID. At most 100 id values can be specified."
+        },
+        "name":{
+          "type":"string",
+          "description":"Game name. The name must be an exact match. For instance, \u201cPokemon\u201d will not return a list of Pokemon games; instead, query the specific Pokemon game(s) in which you are interested. At most 100 name values can be specified."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/games",
+      "response":{
+        "box_art_url":{
+          "type":"object",
+          "description":"Template URL for the game\u2019s box art."
+        },
+        "id":{
+          "type":"string",
+          "description":"Game ID."
+        },
+        "name":{
+          "type":"string",
+          "description":"Game name."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-games"
+    }
+  },
+  "helix/streams":{
+    "get":{
+      "optional_query":{
+        "after":{
+          "type":"string",
+          "description":"Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "before":{
+          "type":"string",
+          "description":"Cursor for backward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "community_id":{
+          "type":"string",
+          "description":"Returns streams in a specified community ID. You can specify up to 100 IDs."
+        },
+        "first":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Maximum: 100. Default: 20."
+        },
+        "game_id":{
+          "type":"string",
+          "description":"Returns streams broadcasting a specified game ID. You can specify up to 100 IDs."
+        },
+        "language":{
+          "type":"string",
+          "description":"Stream language. You can specify up to 100 languages."
+        },
+        "user_id":{
+          "type":"string",
+          "description":"Returns streams broadcast by one or more specified user IDs. You can specify up to 100 IDs."
+        },
+        "user_login":{
+          "type":"string",
+          "description":"Returns streams broadcast by one or more specified user login names. You can specify up to 100 names."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/streams",
+      "response":{
+        "community_ids":{
+          "type":"string[]",
+          "description":"Array of community IDs."
+        },
+        "game_id":{
+          "type":"string",
+          "description":"ID of the game being played on the stream."
+        },
+        "id":{
+          "type":"string",
+          "description":"Stream ID."
+        },
+        "language":{
+          "type":"string",
+          "description":"Stream language."
+        },
+        "pagination":{
+          "type":"string",
+          "description":"A cursor value, to be used in a subsequent request to specify the starting point of the next set of results."
+        },
+        "started_at":{
+          "type":"string",
+          "description":"UTC timestamp."
+        },
+        "tag_ids":{
+          "type":"string",
+          "description":"Shows tag IDs that apply to the stream."
+        },
+        "thumbnail_url":{
+          "type":"string",
+          "description":"Thumbnail URL of the stream. All image URLs have variable width and height. You can replace {width} and {height} with any values to get that size image"
+        },
+        "title":{
+          "type":"string",
+          "description":"Stream title."
+        },
+        "type":{
+          "type":"string",
+          "description":"Stream type: \"live\"\u00a0or \"\"\u00a0(in case of error)."
+        },
+        "user_id":{
+          "type":"string",
+          "description":"ID of the user who is streaming."
+        },
+        "user_name":{
+          "type":"string",
+          "description":"Display name corresponding to user_id."
+        },
+        "viewer_count":{
+          "type":"int",
+          "description":"Number of viewers watching the stream at the time of the query."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-streams"
+    }
+  },
+  "helix/streams/metadata":{
+    "get":{
+      "optional_query":{
+        "after":{
+          "type":"string",
+          "description":"Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "before":{
+          "type":"string",
+          "description":"Cursor for backward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "community_id":{
+          "type":"string",
+          "description":"Returns streams in a specified community ID. You can specify up to 100 IDs."
+        },
+        "first":{
+          "type":"integer",
+          "description":"Maximum number of objects to return. Maximum: 100. Default: 20."
+        },
+        "game_id":{
+          "type":"string",
+          "description":"Returns streams broadcasting the specified game ID. You can specify up to 100 IDs."
+        },
+        "language":{
+          "type":"string",
+          "description":"Stream language. You can specify up to 100 languages."
+        },
+        "user_id":{
+          "type":"string",
+          "description":"Returns streams broadcast by one or more of the specified user IDs. You can specify up to 100 IDs."
+        },
+        "user_login":{
+          "type":"string",
+          "description":"Returns streams broadcast by one or more of the specified user login names. You can specify up to 100 names."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/streams/metadata",
+      "response":{
+        "game_id":{
+          "type":"string",
+          "description":"ID of the game being played on the stream: 488552 (Overwatch), 138585 (Hearthstone), or null (neither Overwatch nor Hearthstone metadata is available)."
+        },
+        "hearthstone":{
+          "type":"object",
+          "description":"Object containing the Hearthstone metadata, if available; otherwise, null."
+        },
+        "\u00a0broadcasteropponent":{
+          "type":"object",
+          "description":"Hearthstone metadata about the broadcaster and the broadcaster\u2019s opponent."
+        },
+        "\u00a0\u00a0hero":{
+          "type":"object",
+          "description":"Metadata about the Overwatch hero selected by the broadcaster. null if empty."
+        },
+        "\u00a0 \u00a0class":{
+          "type":"string",
+          "description":"Class of the Hearthstone hero."
+        },
+        "\u00a0 \u00a0name":{
+          "type":"string",
+          "description":"Name of the Overwatch hero."
+        },
+        "\u00a0 \u00a0type":{
+          "type":"string",
+          "description":"Type of Hearthstone hero."
+        },
+        "overwatch":{
+          "type":"object",
+          "description":"Object containing the Overwatch metadata, if available; otherwise, null."
+        },
+        "\u00a0broadcaster":{
+          "type":"object",
+          "description":"Overwatch metadata about the broadcaster."
+        },
+        "\u00a0 \u00a0ability":{
+          "type":"string",
+          "description":"Ability being used by the broadcaster."
+        },
+        "\u00a0 \u00a0role":{
+          "type":"string",
+          "description":"Role of the Overwatch hero."
+        },
+        "pagination":{
+          "type":"string",
+          "description":"A cursor value, to be used in a subsequent request to specify the starting point of the next set of results."
+        },
+        "user_id":{
+          "type":"string",
+          "description":"User ID of the streamer (broadcaster)."
+        },
+        "user_name":{
+          "type":"string",
+          "description":"Login name corresponding to user_id."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-streams-metadata"
+    }
+  },
+  "helix/streams/markers":{
+    "post":{
+      "required_body":{
+        "user_id":{
+          "type":"string",
+          "description":"ID of the broadcaster in whose live stream the marker is created."
+        }
+      },
+      "optional_body":{
+        "description":{
+          "type":"string",
+          "description":"Description of or comments on the marker."
+        }
+      },
+      "url":"POST https://api.twitch.tv/helix/streams/markers",
+      "response":{
+        "created_at":{
+          "type":"string",
+          "description":"RFC3339 timestamp of the marker."
+        },
+        "description":{
+          "type":"string",
+          "description":"Description of the marker."
+        },
+        "id":{
+          "type":"string",
+          "description":"Unique ID of the marker."
+        },
+        "position_seconds":{
+          "type":"integer",
+          "description":"Relative offset (in seconds) of the marker, from the beginning of the stream."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#create-stream-marker",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user:edit:broadcast"]
+      }
+    },
+    "get":{
+      "required_query":{
+        "user_id":{
+          "type":"string",
+          "description":"ID of the broadcaster from whose stream markers are returned."
+        },
+        "video_id":{
+          "type":"string",
+          "description":"ID of the VOD/video whose stream markers are returned."
+        }
+      },
+      "optional_query":{
+        "after":{
+          "type":"string",
+          "description":"Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "before":{
+          "type":"string",
+          "description":"Cursor for backward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "first":{
+          "type":"string",
+          "description":"Number of values to be returned when getting videos by user or game ID. Limit: 100. Default: 20."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/streams/markers",
+      "response":{
+        "id":{
+          "type":"string",
+          "description":"ID of the marker."
+        },
+        "created_at":{
+          "type":"string",
+          "description":"RFC3339 timestamp of the marker."
+        },
+        "description":{
+          "type":"string",
+          "description":"Description of the marker."
+        },
+        "pagination":{
+          "type":"string",
+          "description":"A cursor value, to be used in a subsequent request to specify the starting point of the next set of results. If this is empty, you are at the last page."
+        },
+        "position_seconds":{
+          "type":"integer",
+          "description":"Relative offset (in seconds) of the marker, from the beginning of the stream."
+        },
+        "url":{
+          "type":"string",
+          "description":"A link to the stream with a query parameter that is a timestamp of the marker\u2019s location."
+        },
+        "user_id":{
+          "type":"string",
+          "description":"ID of the user whose markers are returned."
+        },
+        "user_name":{
+          "type":"string",
+          "description":"Display name corresponding to user_id."
+        },
+        "video_id":{
+          "type":"string",
+          "description":"ID of the stream (VOD/video) that was marked."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-stream-markers",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user:read:broadcast"]
+      }
+    }
+  },
+  "helix/subscriptions":{
+    "get":{
+      "required_query": {
+        "broadcaster_id": {
+          "type": "string",
+          "description": "User ID of the broadcaster. Must match the User ID in the Bearer token."
+        },
+        "user_id": {
+          "type": "string",
+          "description": "Unique identifier of account to get subscription status of. Accepts up to 100 values."
+        }
+      },
+      "url":"GET 'https://api.twitch.tv/helix/subscriptions",
+      "response":{
+        "broadcaster_id":{
+          "type": "string",
+          "description": "User ID of the broadcaster."
+        },
+        "broadcaster_name":{
+          "type": "string",
+          "description": "Display name of the broadcaster."
+        },
+        "is_gift":{
+          "type": "boolean",
+          "description": "Determines if the subscription is a gift subscription."
+        },
+        "tier":{
+          "type": "string",
+          "description": "Type of subscription (Tier 1, Tier 2, Tier 3).\n1000 = Tier 1, 2000 = Tier 2, 3000 = Tier 3 subscriptions."
+        },
+        "plan_name":{
+          "type": "string",
+          "description": "Name of the subscription."
+        },
+        "user_id":{
+          "type": "string",
+          "description": "ID of the subscribed user."
+        },
+        "user_name":{
+          "type": "string",
+          "description": "Display name of the subscribed user."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-broadcaster-subscriptions",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["channel:read:subscriptions"]
+      }
+    }
+  },
+  "helix/tags/streams":{
+    "get":{
+      "optional_query":{
+        "after":{
+          "type": "string",
+          "description": "Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "first":{
+          "type": "integer",
+          "description": "Maximum number of objects to return. Maximum: 100. Default: 20."
+        },
+        "tag_id":{
+          "type": "string",
+          "description": "ID of a tag. Multiple IDs can be specified, separated by ampersands. If provided, only the specified tag(s) is(are) returned. Maximum of 100."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/tags/streams",
+      "response":{
+        "id":{
+          "type": "string",
+          "description": "ID of the tag."
+        },
+        "is_auto":{
+          "type": "boolean",
+          "description": "true if the tag is auto-generated; otherwise, false . An auto-generated tag is one automatically applied by Twitch (e.g., a language tag based on the broadcaster’s settings); these cannot be added or removed by the user."
+        },
+        "localization_names":{
+          "type": "map[string]string",
+          "description": "All localized names of the tag."
+        },
+        "localization_descriptions":{
+          "type": "map[string]string",
+          "description": "All localized descriptions of the tag."
+        },
+        "pagination":{
+          "type": "string",
+          "description": "A cursor value, to be used in a subsequent request to specify the starting point of the next set of results.\nNot supported when tag_id is provided."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-all-stream-tags",
+      "auth": {
+        "token": "AAT"
+      }
+    }
+  },
+  "helix/streams/tags":{
+    "get":{
+      "required_query":{
+        "broadcaster_id":{
+          "type": "string",
+          "description": "ID of the stream thats tags are going to be fetched"
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/streams/tags",
+      "response":{
+        "is_auto":{
+          "type": "boolean",
+          "description": "true if the tag is auto-generated; otherwise, false . An auto-generated tag is one automatically applied by Twitch (e.g., a language tag based on the broadcaster’s settings); these cannot be added or removed by the user."
+        },
+        "localization_names":{
+          "type": "map[string]string",
+          "description": "All localized names of the tag."
+        },
+        "localization_descriptions":{
+          "type": "map[string]string",
+          "description": "All localized descriptions of the tag."
+        },
+        "tag_id":{
+          "type": "string",
+          "description": "ID of the tag."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-stream-tags",
+      "auth": {
+        "token": "AAT"
+      }
+    },
+    "put":{
+      "required_query":{
+        "broadcaster_id":{
+          "type":"string",
+          "description":"ID of the stream for which tags are to be replaced."
+        }
+      },
+      "optional_body":{
+        "tag_ids":{
+          "type": "string []",
+          "description": "IDs of tags to be applied to the stream. Maximum of 100 supported."
+        }
+      },
+      "url":"PUT https://api.twitch.tv/helix/streams/tags",
+      "docs": "https://dev.twitch.tv/docs/api/reference/#replace-stream-tags",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user:edit:broadcast"]
+      }
+    }
+  },
+  "helix/users":{
+    "get":{
+      "optional_query":{
+        "id":{
+          "type":"string",
+          "description":"User ID. Multiple user IDs can be specified. Limit: 100."
+        },
+        "login":{
+          "type":"string",
+          "description":"User login name. Multiple login names can be specified. Limit: 100."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/users",
+      "response":{
+        "broadcaster_type":{
+          "type":"string",
+          "description":"User\u2019s broadcaster type: \"partner\", \"affiliate\", or \"\"."
+        },
+        "description":{
+          "type":"string",
+          "description":"User\u2019s channel description."
+        },
+        "display_name":{
+          "type":"string",
+          "description":"User\u2019s display name."
+        },
+        "email":{
+          "type":"string",
+          "description":"User\u2019s email address. Returned if the request includes the user:read:email scope."
+        },
+        "id":{
+          "type":"string",
+          "description":"User\u2019s ID."
+        },
+        "login":{
+          "type":"string",
+          "description":"User\u2019s login name."
+        },
+        "offline_image_url":{
+          "type":"string",
+          "description":"URL of the user\u2019s offline image."
+        },
+        "profile_image_url":{
+          "type":"string",
+          "description":"URL of the user\u2019s profile image."
+        },
+        "type":{
+          "type":"string",
+          "description":"User\u2019s type: \"staff\", \"admin\", \"global_mod\", or \"\"."
+        },
+        "view_count":{
+          "type":"int",
+          "description":"Total number of views of the user\u2019s channel."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-users",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user:read:email"]
+      }
+    },
+    "put":{
+      "required_query": {
+        "description": {
+          "type": "string",
+          "description": "This updates the description of the user specified."
+        }
+      },
+      "url":"PUT https://api.twitch.tv/helix/users",
+      "response": {
+        "id": {
+          "type": "string",
+          "description": "ID of the user."
+        },
+        "login": {
+          "type": "string",
+          "description": "Login name of the user."
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Display name of the user."
+        },
+        "type": {
+          "type": "string",
+          "description": "User type"
+        },
+        "broadcaster_type": {
+          "type": "string",
+          "description": "Broadcaster type"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description"
+        },
+        "profile_image_url": {
+          "type": "string",
+          "description": "URL to profile image"
+        },
+        "offline_image_url": {
+          "type": "string",
+          "description": " URL to offline image"
+        },
+        "view_count": {
+          "type": "integer",
+          "description": "View count"
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#update-user",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user:edit"]
+      }
+    }
+  },
+  "helix/users/extensions/list":{
+    "get":{
+      "url":"GET https://api.twitch.tv/helix/users/extensions/list",
+      "response":{
+        "can_activate":{
+          "type":"boolean",
+          "description":"Indicates whether the extension is configured such that it can be activated."
+        },
+        "id":{
+          "type":"string",
+          "description":"ID of the extension."
+        },
+        "name":{
+          "type":"string",
+          "description":"Name of the extension."
+        },
+        "type":{
+          "type":"string array",
+          "description":"Types for which the extension can be activated. Valid values: \"component\", \"mobile\", \"panel\", \"overlay\"."
+        },
+        "version":{
+          "type":"string",
+          "description":"Version of the extension."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-user-extensions",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user:read:broadcast"]
+      }
+    }
+  },
+  "helix/users/extensions":{
+    "get":{
+      "optional_query":{
+        "user_id":{
+          "type":"string",
+          "description":"ID of the user whose installed extensions will be returned. Limit: 1."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/users/extensions",
+      "response":{
+        "active":{
+          "type":"boolean",
+          "description":"Activation state of the extension, for each extension type (component, overlay, mobile, panel). If false, no other data is provided."
+        },
+        "component":{
+          "type":"map",
+          "description":"Contains data for video-component Extensions."
+        },
+        "id":{
+          "type":"string",
+          "description":"ID of the extension."
+        },
+        "name":{
+          "type":"string",
+          "description":"Name of the extension."
+        },
+        "overlay":{
+          "type":"map",
+          "description":"Contains data for video-overlay Extensions."
+        },
+        "panel":{
+          "type":"map",
+          "description":"Contains data for panel Extensions."
+        },
+        "version":{
+          "type":"string",
+          "description":"Version of the extension."
+        },
+        "x":{
+          "type":"int",
+          "description":"(Video-component Extensions only) X-coordinate of the placement of the extension."
+        },
+        "y":{
+          "type":"int",
+          "description":"(Video-component Extensions only) Y-coordinate of the placement of the extension."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-user-active-extensions",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user:read:broadcast", "user:edit:broadcast"]
+      }
+    },
+    "put":{
+      "optional_body": {
+        "data": {
+          "type": "json",
+          "description": "You can find an example of the json in the official documentation!"
+        }
+      },
+      "url":"PUT https://api.twitch.tv/helix/users/extensions",
+      "response": {
+        "active":{
+          "type":"boolean",
+          "description":"Activation state of the extension, for each extension type (component, overlay, mobile, panel). If false, no other data is provided."
+        },
+        "component":{
+          "type":"map",
+          "description":"Contains data for video-component Extensions."
+        },
+        "id":{
+          "type":"string",
+          "description":"ID of the extension."
+        },
+        "name":{
+          "type":"string",
+          "description":"Name of the extension."
+        },
+        "overlay":{
+          "type":"map",
+          "description":"Contains data for video-overlay Extensions."
+        },
+        "panel":{
+          "type":"map",
+          "description":"Contains data for panel Extensions."
+        },
+        "version":{
+          "type":"string",
+          "description":"Version of the extension."
+        },
+        "x":{
+          "type":"int",
+          "description":"(Video-component Extensions only) X-coordinate of the placement of the extension."
+        },
+        "y":{
+          "type":"int",
+          "description":"(Video-component Extensions only) Y-coordinate of the placement of the extension."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#update-user-extensions",
+      "auth": {
+        "token": "UAT",
+        "scopes": ["user:edit:broadcast"]
+      }
+    }
+  },
+  "helix/videos":{
+    "get":{
+      "required_query":{
+        "id":{
+          "type":"string",
+          "description":"ID of the video being queried. Limit: 100. If this is specified, you cannot use any of the optional query string parameters below."
+        },
+        "user_id":{
+          "type":"string",
+          "description":"ID of the user who owns the video. Limit 1."
+        },
+        "game_id":{
+          "type":"string",
+          "description":"ID of the game the video is of. Limit 1."
+        }
+      },
+      "optional_query":{
+        "after":{
+          "type":"string",
+          "description":"Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "before":{
+          "type":"string",
+          "description":"Cursor for backward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "first":{
+          "type":"string",
+          "description":"Number of values to be returned when getting videos by user or game ID. Limit: 100. Default: 20."
+        },
+        "language":{
+          "type":"string",
+          "description":"Language of the video being queried. Limit: 1."
+        },
+        "period":{
+          "type":"string",
+          "description":"Period during which the video was created. Valid values: \"all\", \"day\", \"week\", \"month\". Default: \"all\"."
+        },
+        "sort":{
+          "type":"string",
+          "description":"Sort order of the videos. Valid values: \"time\", \"trending\", \"views\". Default: \"time\"."
+        },
+        "type":{
+          "type":"string",
+          "description":"Type of video. Valid values: \"all\", \"upload\", \"archive\", \"highlight\". Default: \"all\"."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/videos",
+      "response":{
+        "created_at":{
+          "type":"string",
+          "description":"Date when the video was created."
+        },
+        "description":{
+          "type":"string",
+          "description":"Description of the video."
+        },
+        "duration":{
+          "type":"string",
+          "description":"Length of the video."
+        },
+        "id":{
+          "type":"string",
+          "description":"ID of the video."
+        },
+        "language":{
+          "type":"string",
+          "description":"Language of the video."
+        },
+        "pagination":{
+          "type":"string",
+          "description":"A cursor value, to be used in a subsequent request to specify the starting point of the next set of results."
+        },
+        "published_at":{
+          "type":"string",
+          "description":"Date when the video was published."
+        },
+        "thumbnail_url":{
+          "type":"object",
+          "description":"Template URL for the thumbnail of the video."
+        },
+        "title":{
+          "type":"string",
+          "description":"Title of the video."
+        },
+        "type":{
+          "type":"string",
+          "description":"Type of video. Valid values: \"upload\", \"archive\", \"highlight\"."
+        },
+        "url":{
+          "type":"object",
+          "description":"URL of the video."
+        },
+        "user_id":{
+          "type":"string",
+          "description":"ID of the user who owns the video."
+        },
+        "user_name":{
+          "type":"string",
+          "description":"Display name corresponding to user_id."
+        },
+        "view_count":{
+          "type":"int",
+          "description":"Number of times the video has been viewed."
+        },
+        "viewable":{
+          "type":"string",
+          "description":"Indicates whether the video is publicly viewable. Valid values: \"public\", \"private\"."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-videos"
+    }
+  },
+  "helix/webhooks/subscriptions":{
+    "get":{
+      "optional_query":{
+        "after":{
+          "type":"string",
+          "description":"Cursor for forward pagination: tells the server where to start fetching the next set of results, in a multi-page response. The cursor value specified here is from the pagination response field of a prior query."
+        },
+        "first":{
+          "type":"string",
+          "description":"Number of values to be returned per page. Limit: 100. Default: 20."
+        }
+      },
+      "url":"GET https://api.twitch.tv/helix/webhooks/subscriptions",
+      "response":{
+        "callback":{
+          "type":"string",
+          "description":"The callback provided for this subscription."
+        },
+        "expires_at":{
+          "type":"string",
+          "description":"Date and time when this subscription expires. Encoded as RFC3339. The timezone is always UTC (\u201cZ\u201d)."
+        },
+        "pagination":{
+          "type":"string",
+          "description":"A cursor value, to be used in a subsequent request to specify the starting point of the next set of results. If this is empty, you are at the last page."
+        },
+        "topic":{
+          "type":"string",
+          "description":"The topic used in the initial subscription."
+        },
+        "total":{
+          "type":"int",
+          "description":"A hint at the total number of results returned, on all pages. Note this is an approximation: as you page through the list, some subscriptions may expire and others may be added."
+        }
+      },
+      "docs": "https://dev.twitch.tv/docs/api/reference/#get-webhook-subscriptions",
+      "auth": {
+        "token": "AAT"
+      }
+    }
+  }
+}

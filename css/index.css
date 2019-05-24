@@ -1,0 +1,27 @@
+textarea{
+    overflow:hidden;
+    padding:10px;
+    width:250px;
+    font-size:14px;
+    margin:50px auto;
+    display:block;
+}
+
+.white-space-pre {
+    white-space: pre-wrap;
+}
+
+.btnSize {
+    width: 98px;
+}
+
+.spanSize {
+    width:156px;
+}
+
+pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }
