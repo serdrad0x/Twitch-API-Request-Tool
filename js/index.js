@@ -116,16 +116,14 @@ function setRequest(){
     let params = "";
     let separator = "?";
 
-    for(let key in apiRequestQuery["path"]){
-        let value = apiRequestQuery["path"].get(key);
+    for(const [key, value] of apiRequestQuery["path"].entries()){
         if(value !== "") {
             entryPoint = entryPoint.replace(key, value);
         }
     }
     url += entryPoint;
 
-    for(let key in apiRequestQuery["parameters"]) {
-        let value = apiRequestQuery["parameters"].get(key);
+    for(const [key, value] of apiRequestQuery["parameters"].entries()) {
         if (value !== "") {
             const param = key.slice(0, key.lastIndexOf("_"));
             params += separator + param + "=" + value;
