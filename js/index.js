@@ -42,7 +42,7 @@ function updateParameters(requests, type){
                 "      <span class=\"input-group-text\">" + key + "</span>\n" +
                 "      <span class=\"input-group-text\">" + value["type"] + "</span>\n" +
                 "    </div>\n" +
-                "    <input oninput=\"setParameters(this,'"+key+"_"+ length+"')\" name=\""+key+"\" type=\"text\" class=\"form-control\">\n" +
+                "    <input autocomplete=\"new-password\" oninput=\"setParameters(this,'"+key+"_"+ length+"')\" name=\""+key+"\" type=\"text\" class=\"form-control\">\n" +
                 "  </div>\n"+
                 "</div>"
             );
@@ -500,6 +500,8 @@ let loadRequestType = function(requests){
     }
     requestTypeDiv.selectpicker('val', result[0].value);
     requestTypeDiv.selectpicker("refresh");
+
+    requestJSON(updateEntryPointsByRequestType);
 };
 
 let loadScope = function(scopes) {
@@ -550,7 +552,7 @@ function updatePath(requests){
                 "      <span class=\"input-group-text\">" + key.replace("<", "&lt;").replace(">", "&gt;") + "</span>\n" +
                 "      <span class=\"input-group-text\">" + value["type"] + "</span>\n" +
                 "    </div>\n" +
-                "    <input oninput=\"setPath(this,'" + key + "')\" name=\"" + key + "\" type=\"text\" class=\"form-control\">\n" +
+                "    <input autocomplete=\"new-password\" oninput=\"setPath(this,'" + key + "')\" name=\"" + key + "\" type=\"text\" class=\"form-control\">\n" +
                 "  </div>\n" +
                 "</div>"
             );
@@ -613,6 +615,23 @@ function setApiResult(response){
 
 $(document).ready(function() {
     const params = getUrlParameters();
+    const pageUrl = window.location.href.slice(0, window.location.href.lastIndexOf("#"));
+
+    /*
+    * For security reasons, the access token received by Twitch through the URL will be removed from the address bar!
+    * The access token is still be shown for a split second, before it is removed. So be careful if you are streaming
+    * and using TART, requesting an access token!
+    * */
+    if(pageUrl !== '') {
+        if (typeof (history.pushState) !== "undefined") {
+            const state = {
+                title: document.title,
+                url: 'index.html'
+            };
+            history.pushState(state, state.title, state.url);
+        }
+    }
+
     if("access_token" in params){
         localStorage.setItem("access_token", params["access_token"]);
         $("#token_used").val(params["access_token"]);
@@ -627,8 +646,6 @@ $(document).ready(function() {
     // Initialize values!
     requestJSON(loadRequestType); // Add elements to entry point
     scopeJSON(loadScope);  // Add elements to scope
-
-    requestJSON(updateEntryPointsByRequestType);
 
     $("#api_type").change(function () {
         apiRequestQuery["api"] = $("#api_type option:selected")[0].value;
@@ -645,8 +662,6 @@ $(document).ready(function() {
 
         requestJSON(loadRequestType); // Add elements to entry point
         scopeJSON(loadScope);  // Add elements to scope
-
-        requestJSON(updateEntryPointsByRequestType);
     });
 
     // If the type of request (get/post) is changed, while a request (helix/entitlements/...) is selected, the documentation must be updated!
@@ -746,7 +761,7 @@ $(document).ready(function() {
                     setApiResult(response["responseJSON"]);
                 } else if(response["status"] === 200){
                     setApiResult({"status": 200, "message": "Token removed"});
-                    $("#token_used").val();
+                    $("#token_used").val("");
                     localStorage.removeItem("access_token");
                     localStorage.removeItem("helix_scopes");
                     localStorage.removeItem("kraken_scopes");
