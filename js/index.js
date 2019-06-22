@@ -780,14 +780,20 @@ $(document).ready(function() {
         const username = $('#username').val();
         const client_id = $('#client_id').val();
         const accessToken = $('#token_used').val();
+
+        let headers = {
+            'Client-ID': client_id
+        };
+
+        if(accessToken !== ""){
+            headers['Authorization'] = 'Bearer ' + accessToken;
+        }
+
         $.ajax({
             type: "GET",
             dataType: "json",
             url: encodeURI("https://api.twitch.tv/helix/users"),
-            headers: {
-                "Client-ID": client_id,
-                'Authorization': 'Bearer '+accessToken
-            },
+            headers: headers,
             data: {
                 login: username
             },
@@ -805,14 +811,20 @@ $(document).ready(function() {
         const userID = $('#userid').val();
         const client_id = $('#client_id').val();
         const accessToken = $('#token_used').val();
+
+        let headers = {
+            'Client-ID': client_id
+        };
+
+        if(accessToken !== ""){
+            headers['Authorization'] = 'Bearer ' + accessToken;
+        }
+
         $.ajax({
             type: "GET",
             dataType: "json",
             url: encodeURI("https://api.twitch.tv/helix/users"),
-            headers: {
-                "Client-ID": client_id,
-                'Authorization': 'Bearer '+accessToken
-            },
+            headers: headers,
             data: {
                 id: userID
             },
