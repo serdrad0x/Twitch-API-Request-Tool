@@ -116,14 +116,14 @@ function setRequest(){
     let params = "";
     let separator = "?";
 
-    for(const [key, value] of apiRequestQuery["path"].entries()){
+    for(const [key, value] of apiRequestQuery["path"]){
         if(value !== "") {
             entryPoint = entryPoint.replace(key, value);
         }
     }
     url += entryPoint;
 
-    for(const [key, value] of apiRequestQuery["parameters"].entries()) {
+    for(const [key, value] of apiRequestQuery["parameters"]) {
         if (value !== "") {
             const param = key.slice(0, key.lastIndexOf("_"));
             params += separator + param + "=" + value;
@@ -686,22 +686,24 @@ $(document).ready(function() {
         const auth = {"helix": "Bearer", "kraken": "OAuth"};
         let entryPoint = apiRequestQuery["entry_point"];
         let headers = {
-            'Client-ID': client_id,
-            'Authorization': auth[apiRequestQuery["api"]] + ' ' + accessToken
+            'Client-ID': client_id
         };
         let data = "?";
 
-        for(let key in apiRequestQuery["parameters"]){
-            if(apiRequestQuery["parameters"].get(key) !== "") {
-                data += key.slice(0, key.lastIndexOf("_")) + "=" + apiRequestQuery["parameters"].get(key) + "&";
+        if(accessToken !== ""){
+            headers['Authorization'] = auth[apiRequestQuery["api"]] + ' ' + accessToken;
+        }
+
+        for(const [key, value] of apiRequestQuery["parameters"]){
+            if(value !== "") {
+                data += key.slice(0, key.lastIndexOf("_")) + "=" + value + "&";
             }
         }
         data = data.slice(0,-1);
 
         if(apiRequestQuery["api"] === "kraken"){
             headers["Accept"] = "application/vnd.twitchtv.v5+json";
-            for(let key in apiRequestQuery["path"]){
-                let value = apiRequestQuery["path"].get(key);
+            for(const [key, value] of apiRequestQuery["path"]){
                 if(value !== "") {
                     entryPoint = entryPoint.replace(key, value);
                 }
