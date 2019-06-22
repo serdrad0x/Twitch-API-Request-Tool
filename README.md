@@ -3,14 +3,14 @@ A tool to easily make requests to the Twitch API. It supports Kraken ([Twitch AP
 and Helix ([New Twitch API](https://dev.twitch.tv/docs/api/))
 
 # Getting Started - Local
-You can use the Twitch API Request Tool directly from its website http://tart.retro-elite.de or run it local on your own
+You can use the Twitch API Request Tool directly from its website https://tart.retro-elite.de or run it local on your own
 machine.
 
 If you want to run it local, you have to follow the following steps:
 
 1. Easiest way would be to run a web server locally. Otherwise you have to handle (depending on your browser) CORS
 (cross origin requests) issues. 
-2. Change "redirect_uri" from http://tart.retro-elite.de/index.html to your local host. E.g.: 
+2. Change "redirect_uri" from https://tart.retro-elite.de/index.html to your local host. E.g.: 
 redirect_uri = "localhost"
 3. Don't forget to match the OAuth Redirect URL from https://dev.twitch.tv/console/apps of your application with your
 local change!
@@ -24,7 +24,7 @@ Just fill in the following information and click create:
 | Field               | Description                                             |
 | ------------------- | ------------------------------------------------------- |
 | Name                | Feel free to choose any name you like!                  |
-| OAuth Redirect URL  | You have to use: http://tart.retro-elite.de/index.html  |
+| OAuth Redirect URL  | You have to use: https://tart.retro-elite.de/index.html |
 | Category            | Should be: Website Integration                          |
 
 You will get your client id which you can use on the website!
